@@ -2,8 +2,19 @@
 <html>
 <head>
     <script src="graphics.js"></script>
+    <script src="util.js"></script>
+	<script src="rules.js"></script>
+	<script src="board.js"></script>
+
     <style>
-    canvas { position: absolute; left: 100px; top: 100px; }
+	    #canvas-container {
+	    	position: absolute;
+	    	left: 100px;
+	    	top: 100px;
+	    	width: 400px;
+	    	height: 400px;
+	    	border: 2px solid black;
+	    }
     </style>
 </head>
 
@@ -12,12 +23,14 @@
 <!--
 define the HTML canvas element that will hold the graphical output
 -->
-<canvas id="canvas" width="400" height="400"></canvas>
-
+<div id="canvas-container">
+    <canvas id="canvas"></canvas>
+</div>
 <!--
 execute the JavaScript
 -->
-<script src="basic_drawing.js"></script>
+<script src="index.js"></script>
+
 
 </body>
 </html>

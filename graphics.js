@@ -17,7 +17,7 @@ var Pad = function (canvas) {
   	canvas.style.height='100%';
   	canvas.width  = canvas.offsetWidth;
   	canvas.height = canvas.offsetHeight;
-	
+
 	var DEFAULT_CIRCLE_RADIUS = 5;
 	var DEFAULT_LINE_WIDTH = 2;
 

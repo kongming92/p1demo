@@ -3,7 +3,7 @@ var Rules = function() {
 
 	var that = Object.create(Rules.prototype);
 
-	/**
+	/*
 		For each cell, the rules of Game of Life dictate that only its current alive-ness
 		and the number of neighbors affect its alive-ness at the next time step
 
@@ -33,7 +33,5 @@ var Rules = function() {
 		}
 	};
 
-	return that
-
-
+	return that;
 };

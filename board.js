@@ -1,14 +1,16 @@
 var GameCoord = function(x, y) {
 	var that = Object.create(Board.prototype);
-	return {x: x, y: y};
+	that.x = x;
+	that.y = y;
+	return that;
 };
 
 var State = function(width, height, alive) {
-	return {
-		width: width,
-		height: height,
-		alive: alive
-	};
+	var that = Object.create(State.prototype);
+	that.width = width;
+	that.height = height;
+	that.alive = alive;
+	return that;
 };
 
 var Board = function(initState) {
@@ -36,17 +38,12 @@ var Board = function(initState) {
 		board[coord.x][coord.y] = true;
 	});
 
-	// Returns whether the cell at (x,y) is alive i.e. the boolean value of board[x][y]
-	var isAlive = function(x, y) {
-		return board[x][y];
-	};
-
 	var getNumNeighbors = function(x, y) {
 
 		var numNeighbors = 0;
 		from_to(Math.max(0, x-1), Math.min(width-1, x+1), function(i) {
 			from_to(Math.max(0, y-1), Math.min(height-1, y+1), function(j) {
-				if (!(x === i && y === j) && isAlive(i, j)) {
+				if (!(x === i && y === j) && that.isAlive(i, j)) {
 					numNeighbors += 1;
 				}
 			});
@@ -55,11 +52,9 @@ var Board = function(initState) {
 		return numNeighbors;
 	};
 
-	that.getBoard = function() {
-		return board.slice();
+	that.isAlive = function(x, y) {
+		return board[x][y];
 	};
-
-	that.isAlive = isAlive;
 
 	that.getNewBoardState = function(rules) {
 
@@ -67,7 +62,7 @@ var Board = function(initState) {
 
 		from_to(0, width-1, function(i) {
 			from_to(0, height-1, function(j) {
-				if (rules.isAliveNext(getNumNeighbors(i, j), isAlive(i, j))) {
+				if (rules.isAliveNext(getNumNeighbors(i, j), that.isAlive(i, j))) {
 					newInitAlive.push(GameCoord(i, j));
 				}
 			});

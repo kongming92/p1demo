@@ -5,12 +5,12 @@
     <script src="util.js"></script>
 	<script src="rules.js"></script>
 	<script src="board.js"></script>
+	<script src="initialize.js"></script>
 
     <style>
-	    #canvas-container {
-	    	position: absolute;
+	    .canvas-container {
+	    	position: relative;
 	    	left: 100px;
-	    	top: 100px;
 	    	width: 400px;
 	    	height: 400px;
 	    	border: 2px solid black;
@@ -23,8 +23,17 @@
 <!--
 define the HTML canvas element that will hold the graphical output
 -->
-<div id="canvas-container">
-    <canvas id="canvas"></canvas>
+<div>
+	<h2>Initial State:</h2>
+	<div class="canvas-container">
+	    <canvas id="canvas-start"></canvas>
+	</div>
+</div>
+<div>
+	<h2>Current State:</h2>
+	<div class="canvas-container">
+		<canvas id="canvas"></canvas>
+	</div>
 </div>
 <!--
 execute the JavaScript

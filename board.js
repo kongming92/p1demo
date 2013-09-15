@@ -9,6 +9,14 @@ var GameCoord = function(x, y) {
 	return that;
 };
 
+
+/*
+	The object that represents a Game of Life board.
+
+	A board is initialized with its dimensions and the list of alive cells (which is an array of GameCoord)
+	Boards are immutable. One can create new Board objects to represent the changes in state -- by calling
+	getNewBoardState(), for example.
+*/
 var Board = function(width, height, alive) {
 
 	var that = Object.create(Board.prototype);
@@ -39,7 +47,6 @@ var Board = function(width, height, alive) {
 		(right, below, and diagonally right/below)
 	*/
 	var getNumNeighbors = function(x, y) {
-
 		if (x < 0 || y < 0 || x >= width || y >= height) {
 			return 0;
 		}
@@ -82,9 +89,7 @@ var Board = function(width, height, alive) {
 		existing board object is never modified.
 	*/
 	that.getNewBoardState = function(rules) {
-
 		var newAlive = [];
-
 		from_to(0, width-1, function(i) {
 			from_to(0, height-1, function(j) {
 				if (rules.isAliveNext(getNumNeighbors(i, j), that.isAlive(i, j))) {

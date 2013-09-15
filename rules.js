@@ -1,4 +1,3 @@
-
 var Rules = function() {
 
 	var that = Object.create(Rules.prototype);
@@ -17,6 +16,10 @@ var Rules = function() {
 		should be alive the next time step
 	*/
 	that.isAliveNext = function(numNeighbors, isAlive) {
+
+		if (typeof numNeighbors === 'undefined' || numNeighbors < 0) {
+			return false;
+		}
 
 		// Rules taken from Wikipedia's description of the game:
 		// http://en.wikipedia.org/wiki/Conway's_Game_of_Life#Rules

@@ -5,7 +5,10 @@ var Initialize = function(sizeX, sizeY) {
 	// Initialize the board randomly, where each cell has initial probability of being alive given by factor
 	// If factor is not defined, it defaults to 0.05
 	var getRandomInitialConditions = function(factor) {
-		factor = (typeof factor !== 'undefined') ? factor : 0.1;
+		if (typeof factor === 'undefined') {
+			factor = 0.1;
+		}
+		assert(typeof factor === 'number' && factor >= 0 && factor <= 1, 'factor is not a number between 0 and 1');
 		var starting = [];
 
 		from_to(0, sizeX - 1, function(i) {

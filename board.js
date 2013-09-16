@@ -47,9 +47,9 @@ var Board = function(width, height, alive) {
 		(right, below, and diagonally right/below)
 	*/
 	var getNumNeighbors = function(x, y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) {
-			return 0;
-		}
+
+		assert(x >= 0 && x < width, 'x is not within bounds');
+		assert(y >= 0 && y < width, 'y is not within bounds');
 
 		var numNeighbors = 0;
 		from_to(Math.max(0, x-1), Math.min(width-1, x+1), function(i) {
@@ -66,13 +66,10 @@ var Board = function(width, height, alive) {
 	/*
 		Returns the status of the cell at position (x, y). Requires that the inputs x and y be valid board coordinates
 		(i.e. nonnegative and no greater than the width or height of the board)
-
-		If out-of-bounds inputs are given then the response is always false
 	*/
 	that.isAlive = function(x, y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) {
-			return false;
-		}
+		assert(x >= 0 && x < width, 'x is not within bounds');
+		assert(y >= 0 && y < width, 'y is not within bounds');
 		return board[x][y];
 	};
 

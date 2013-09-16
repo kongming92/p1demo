@@ -19,9 +19,9 @@ var Rules = function() {
 	*/
 	that.isAliveNext = function(numNeighbors, isAlive) {
 
-		if (typeof numNeighbors === 'undefined' || numNeighbors < 0) {
-			return false;
-		}
+		assert(typeof numNeighbors === 'number', 'numNeighbors is not a number');
+		assert(numNeighbors >= 0, 'numNeighbors is negative');
+		assert(typeof isAlive === 'boolean', 'isAlive is not a boolean');
 
 		// Rules taken from Wikipedia's description of the game:
 		// http://en.wikipedia.org/wiki/Conway's_Game_of_Life#Rules

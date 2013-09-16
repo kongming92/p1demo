@@ -32,3 +32,13 @@ var getParam = function(sname) {
 	}
 	return sval;
 };
+
+/*
+	Code to simulate an assertion
+	http://stackoverflow.com/questions/15313418/javascript-assert
+*/
+var assert = function(condition, message) {
+	if (!condition) {
+		throw message || "Assertion failed";
+	}
+};

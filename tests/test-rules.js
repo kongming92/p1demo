@@ -7,5 +7,4 @@ test("testing isAliveNext", function() {
 	equal(rules.isAliveNext(3, false), true, "dead with 3 neighbors becomes alive");
 	equal(rules.isAliveNext(2, false), false, "dead with 2 neighbors stays dead");
 	equal(rules.isAliveNext(4, false), false, "dead with 4 neighbors stays dead");
-	equal(rules.isAliveNext(-1, true), false, "negative input returns dead");
 });

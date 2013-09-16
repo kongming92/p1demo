@@ -46,5 +46,3 @@
 	setInterval(stepTime, TIMESTEP);
 
 })();
-
-

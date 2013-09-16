@@ -14,6 +14,8 @@ var Rules = function() {
 
 		This function simply returns whether a cell with numNeighbors neighbors and isAlive
 		should be alive the next time step
+
+		http://en.wikipedia.org/wiki/Conway's_Game_of_Life#Rules
 	*/
 	that.isAliveNext = function(numNeighbors, isAlive) {
 

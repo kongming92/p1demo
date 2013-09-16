@@ -77,16 +77,12 @@ var Board = function(width, height, alive) {
 	};
 
 	/*
-		Given a board state, return the board state at the next time step according to the rules passed into the function
+		Given a Board, return a new Board of the next time step according to the rules passed into the function.
+		The existing Board is not modified.
 
 		The rules object must provide a public function isAliveNext that determines whether a cell is alive
 		at the next timestep depending on how many alive neighbors it has and whether the cell is alive
 		at the current timestep.
-
-		The rules to the game can be interchanged, as long as the function signature to isAliveNext remains the same.
-
-		This function returns a new Board object that represents the state of the board at the next timestep. The
-		existing board object is never modified.
 	*/
 	that.getNewBoardState = function(rules) {
 		var newAlive = [];
@@ -100,6 +96,11 @@ var Board = function(width, height, alive) {
 
 		return Board(width, height, newAlive);
 	};
+
+	// To debug the private function getNumNeighbors
+	if (DEBUG) {
+		that.getNumNeighbors = getNumNeighbors;
+	}
 
 	return that;
 };

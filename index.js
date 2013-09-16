@@ -1,7 +1,9 @@
 (function() {
 
+	DEBUG = false;
+
 	var BLUE = Color(0,0,255);
-	var TIMESTEP = 500; // in ms
+	var TIMESTEP = 200; // in ms
 
 	// create the drawing pad object and associate with the canvas
 	// the padStart canvas shows the inital state and is never changed
@@ -9,7 +11,7 @@
 	var pad = Pad(document.getElementById('canvas'));
 
 	// define the number of pixels of a single cell
-	var CELL_SIZE = 8;
+	var CELL_SIZE = 4;
 
 	// define the number of points in the game grid, which is equivalent to number of pixels / pixels per cell
 	var GAME_SIZE_X = pad.get_width() / CELL_SIZE;

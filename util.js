@@ -1,4 +1,3 @@
-
 /*
 	Code for iteration abstractions that replace most for-loops
 	Code taken from the code in Prof. Jackson's Fall 2013 6.170 lectures

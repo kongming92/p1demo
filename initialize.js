@@ -1,6 +1,6 @@
 var Initialize = function(sizeX, sizeY) {
 
-	var that = Object.create(Initialize.prototype);
+	var self = Object.create(Initialize.prototype);
 
 	// Initialize the board randomly, where each cell has initial probability of being alive given by factor
 	// If factor is not defined, it defaults to 0.05
@@ -57,10 +57,10 @@ var Initialize = function(sizeX, sizeY) {
 	};
 
 	if (getParam('oscillator') === 'true') {
-		that.getInitialConditions = getOscillators;
+		self.getInitialConditions = getOscillators;
 	} else {
-		that.getInitialConditions = getRandomInitialConditions;
+		self.getInitialConditions = getRandomInitialConditions;
 	}
 
-	return that;
+	return self;
 };

@@ -19,7 +19,7 @@
 	var rules = Rules();
 
 	// initialize the board
-	var board = Board(GAME_SIZE_X, GAME_SIZE_Y, Initialize(GAME_SIZE_X, GAME_SIZE_Y).getInitialConditions());
+	var board = Board(GAME_SIZE_X, GAME_SIZE_Y, rules);
 
 	// things to do at each timestep:
 	// first, draw the current state of the board to the pad

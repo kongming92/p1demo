@@ -3,7 +3,7 @@ var Initialize = function(sizeX, sizeY) {
 	var self = Object.create(Initialize.prototype);
 
 	// Initialize the board randomly, where each cell has initial probability of being alive given by factor
-	// If factor is not defined, it defaults to 0.05
+	// If factor is not defined, it defaults to 0.1
 	var getRandomInitialConditions = function(factor) {
 		if (typeof factor === 'undefined') {
 			factor = 0.1;

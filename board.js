@@ -27,7 +27,7 @@ var Board = function(width, height, rules, alive) {
 		board.push(col);
 	});
 
-	if (alive === undefined) {
+	if (typeof alive === 'undefined') {
 		alive = Initialize(width, height).getInitialConditions();
 	}
 

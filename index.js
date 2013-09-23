@@ -1,4 +1,4 @@
-var DEBUG = false;
+DEBUG = false;
 
 $(document).ready(function() {
 	var GAME_SIZE_X = 60;

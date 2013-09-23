@@ -1,6 +1,9 @@
 // A controller for the board displayed to the browser
-// The BoardControl object contains functions for populating the DOM with the grid, responding
+// The BoardControl object contains functions for creating the grid of <div> elements, responding
 // to click events, and drawing the appropriate cells to the grid.
+
+// The controller assumes the existence of a corresponding BoardView, which handles the DOM-level
+// drawing tasks.
 
 // For proper functionality, requires that there is a button with id start-button, and that
 // possible initial states are found within a HTML select element.
@@ -21,17 +24,10 @@ var BoardControl = function(board) {
 	var $startButton = $('#start-button');
 	var $selector = $('select');
 
-	// A 2-dimensional array of jQuery objects for DOM elements (<div>'s) that comprise
-	// the board shown in the browser
-
-	// Rep invariant:
-	// $boardElts should be the same size as the board. That is, the length of $boardElts is width
-	// and the length of each subarray of $boardElts is height.
-	// Each $boardElts[i][j] should be a jQuery object corresponding to the cell located at (i, j)
-	var $boardElts = [];
-	from_to(0, width - 1, function(i) {
-		$boardElts.push([]);
-	});
+	// The View object for the board
+	// Ultimately handles all of the drawing (e.g. changing the HTML class to render cells as alive/dead)
+	// Also keeps a 2-dimensional array of all DOM elements in the grid
+	var boardView = BoardView(width, height);
 
 	// Begin to take time steps and animate the grid
 	// Changes the button to read 'Stop' and disables the select element from being used
@@ -53,20 +49,19 @@ var BoardControl = function(board) {
 		stopped = true;
 	};
 
-	// On each step, get the board's state, and draw it to the browser
+	// On each step, get the board's new state, and draw it to the browser
 	var takeStep = function() {
 		board = board.getNewBoardState(rules);
 		drawBoard();
 	};
 
 	// Create the board to be rendered in the browser by creating a grid of <div> elements
-	// For each element, keep its reference in the $boardElts array and attach click handlers to it
+	// For each element, attach click handlers to it, and then pass it to the view with the proper coordinates
+
+	// Requires that the BoardView object has a public addElt function which adds the created <div> elements
+	// to the proper location in the grid
 	var createBoard = function() {
-		var $container = $('#main-container');
 		from_to(0, height - 1, function(j) {
-			var $row = $('<div />', {
-				'class': 'row'
-			});
 			from_to(0, width - 1, function(i) {
 				var $cell = $('<div />', {
 					'class': 'cell',
@@ -83,29 +78,30 @@ var BoardControl = function(board) {
 
 					}
 				});
-				$row.append($cell);
-				$boardElts[i][j] = $cell;
+				boardView.addElt(i, j, $cell);
 			});
-			$container.append($row);
 		});
 	};
 
 	// Draw the current state of the board
-	// The board will be rendered properly in the browser if the class 'alive' produces the proper styling
-	// to indicate an alive cell.
+	// Requires that the view provide public setAlive and setDead methods,
+	// without worrying about their implementation in the DOM
 	var drawBoard = function() {
 		from_to(0, width - 1, function(i) {
 			from_to(0, height - 1, function(j) {
-				var $cell = $boardElts[i][j];
 				if (board.isAlive(i, j)) {
-					$cell.addClass('alive');
+					boardView.setAlive(i, j);
 				} else {
-					$cell.removeClass('alive');
+					boardView.setDead(i, j);
 				}
 			});
 		});
 	};
 
+	// The function that does all of the inital setup of the game in the browser
+	// Attaches handlers to clicking the start/stop button and changing options in the selector
+	// Finally, calls the createBoard function to create the grid of <div>'s, renders them
+	// in the view, and draws the alive cells.
 	self.init = function() {
 		$startButton.on('click', function(e) {
 			if (stopped) {
@@ -116,7 +112,7 @@ var BoardControl = function(board) {
 		});
 
 		$selector.on('change', function(e) {
-			var option = $selector.val();
+			var option = $selector.val();	// the option string is encoded in the HTML
 			var initialize = Initialize();
 			var conditions;
 
@@ -135,6 +131,7 @@ var BoardControl = function(board) {
 		});
 
 		createBoard();
+		boardView.renderGrid();
 		drawBoard();
 
 	};

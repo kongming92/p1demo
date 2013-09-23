@@ -1,0 +1,47 @@
+.row {
+	line-height: 0;
+}
+
+.cell {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border: 1px solid #CCC;
+	background-color: #EEE;
+}
+
+.cell.alive {
+	background-color: #555;
+}
+
+button {
+	width: 85px;
+	height: 40px;
+	font-size: 1.2em;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #CCC;
+	border: 1px solid #C5C5C5;
+	-webkit-box-shadow: 0 0 1px;
+	-moz-box-shadow: 0 0 1px;
+	box-shadow: 0 0 1px;
+}
+
+/* Colors taken from Twitter Bootstrap buttons / alerts */
+button.start {
+	background-color: #5BB75B;
+}
+
+button.stop {
+	background-color: #E76868;
+}
+
+button.start:not([disabled]):hover {
+	background-color: #51A351;
+
+}
+
+button.stop:not([disabled]):hover {
+	background-color: #DA4F49;
+}

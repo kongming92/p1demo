@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="index.css" />
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="util.js"></script>
+	<script src="rules.js"></script>
+	<script src="board.js"></script>
+	<script src="initialize.js"></script>
+	<script src="selector-control.js"></script>
+	<script src="board-view.js"></script>
+	<script src="board-control.js"></script>
+</head>
+
+<body>
+	<div id="control-container">
+		<select>
+			<option value="random10">Random with alive probability 10%</option>
+			<option value="random20">Random with alive probability 20%</option>
+			<option value="oscillator">Oscillator patterns</option>
+			<option value="blank">Blank board</option>
+		</select>
+		<button id="start-button" class="start">Start</button>
+	</div>
+	<div id="main-container">
+
+	</div>
+
+<!--
+execute the JavaScript
+-->
+<script src="index.js"></script>
+
+</body>
+</html>

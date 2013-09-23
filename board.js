@@ -13,22 +13,22 @@ var GameCoord = function(x, y) {
 // A board is initialized with its dimensions and the list of alive cells (which is an array of GameCoord)
 // Boards are immutable. One can create new Board objects to represent the changes in state -- by calling
 // getNewBoardState(), for example.
-var Board = function(width, height, rules, alive) {
+var Board = function(alive) {
 
 	var self = Object.create(Board.prototype);
 	var board = [];
 
 	// Initialize a completely empty board
-	from_to(0, width-1, function() {
+	from_to(0, GAME_SIZE_X-1, function() {
 		var col = [];
-		from_to(0, height-1, function() {
+		from_to(0, GAME_SIZE_Y-1, function() {
 			col.push(false);
 		});
 		board.push(col);
 	});
 
 	if (typeof alive === 'undefined') {
-		alive = Initialize(width, height).getInitialConditions();
+		alive = Initialize().getRandomInitialConditions(0.1);
 	}
 
 	// Set the appropriate cells on the board to be true
@@ -45,12 +45,12 @@ var Board = function(width, height, rules, alive) {
 	// So, for example, the cell at (0, 0) - the top left corner - has at most 3 live neighbors
 	// (right, below, and diagonally right/below)
 	var getNumNeighbors = function(x, y) {
-		assert(x >= 0 && x < width, 'x is not within bounds');
-		assert(y >= 0 && y < width, 'y is not within bounds');
+		assert(x >= 0 && x < GAME_SIZE_X, 'x is not within bounds');
+		assert(y >= 0 && y < GAME_SIZE_Y, 'y is not within bounds');
 
 		var numNeighbors = 0;
-		from_to(Math.max(0, x-1), Math.min(width-1, x+1), function(i) {
-			from_to(Math.max(0, y-1), Math.min(height-1, y+1), function(j) {
+		from_to(Math.max(0, x-1), Math.min(GAME_SIZE_X-1, x+1), function(i) {
+			from_to(Math.max(0, y-1), Math.min(GAME_SIZE_Y-1, y+1), function(j) {
 				if (!(x === i && y === j) && self.isAlive(i, j)) {
 					numNeighbors += 1;
 				}
@@ -63,8 +63,8 @@ var Board = function(width, height, rules, alive) {
 	// Returns the status of the cell at position (x, y). Requires that the inputs x and y be valid board coordinates
 	// (i.e. nonnegative and no greater than the width or height of the board)
 	self.isAlive = function(x, y) {
-		assert(x >= 0 && x < width, 'x is not within bounds');
-		assert(y >= 0 && y < width, 'y is not within bounds');
+		assert(x >= 0 && x < GAME_SIZE_X, 'x is not within bounds');
+		assert(y >= 0 && y < GAME_SIZE_Y, 'y is not within bounds');
 		return board[x][y];
 	};
 
@@ -74,17 +74,25 @@ var Board = function(width, height, rules, alive) {
 	// The rules object must provide a public function isAliveNext that determines whether a cell is alive
 	// at the next timestep depending on how many alive neighbors it has and whether the cell is alive
 	// at the current timestep.
-	self.getNewBoardState = function() {
+	self.getNewBoardState = function(rules) {
 		var newAlive = [];
-		from_to(0, width-1, function(i) {
-			from_to(0, height-1, function(j) {
+		from_to(0, GAME_SIZE_X-1, function(i) {
+			from_to(0, GAME_SIZE_Y-1, function(j) {
 				if (rules.isAliveNext(getNumNeighbors(i, j), self.isAlive(i, j))) {
 					newAlive.push(GameCoord(i, j));
 				}
 			});
 		});
 
-		return Board(width, height, rules, newAlive);
+		return Board(newAlive);
+	};
+
+	self.setAlive = function(x, y) {
+		board[x][y] = true;
+	};
+
+	self.setDead = function(x, y) {
+		board[x][y] = false;
 	};
 
 	// To debug the private function getNumNeighbors

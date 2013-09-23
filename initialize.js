@@ -1,18 +1,26 @@
-var Initialize = function(sizeX, sizeY) {
+var Initialize = function() {
 
 	var self = Object.create(Initialize.prototype);
 
+	var listToGameCoords = function(coordsList) {
+		gameCoords = [];
+		each(coordsList, function(item) {
+			gameCoords.push(GameCoord(item[0], item[1]));
+		});
+		return gameCoords;
+	};
+
 	// Initialize the board randomly, where each cell has initial probability of being alive given by factor
 	// If factor is not defined, it defaults to 0.1
-	var getRandomInitialConditions = function(factor) {
+	self.getRandomInitialConditions = function(factor) {
 		if (typeof factor === 'undefined') {
 			factor = 0.1;
 		}
 		assert(typeof factor === 'number' && factor >= 0 && factor <= 1, 'factor is not a number between 0 and 1');
 		var starting = [];
 
-		from_to(0, sizeX - 1, function(i) {
-			from_to(0, sizeY - 1, function(j) {
+		from_to(0, GAME_SIZE_X - 1, function(i) {
+			from_to(0, GAME_SIZE_Y - 1, function(j) {
 				if (Math.random() < factor) {
 					starting.push(GameCoord(i, j));
 				}
@@ -23,7 +31,7 @@ var Initialize = function(sizeX, sizeY) {
 
 	// Oscillators are taken from the Wikipedia article on Game of Life
 	// http://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns
-	var getOscillators = function() {
+	self.getOscillators = function() {
 		var starting = [];
 
 		blinker = listToGameCoords([[10, 10], [11, 10], [12, 10]]);
@@ -48,19 +56,9 @@ var Initialize = function(sizeX, sizeY) {
 		return starting.concat(blinker, toad, beacon, pulsar);
 	};
 
-	var listToGameCoords = function(coordsList) {
-		gameCoords = [];
-		each(coordsList, function(item) {
-			gameCoords.push(GameCoord(item[0], item[1]));
-		});
-		return gameCoords;
+	self.getBlank = function() {
+		return [];
 	};
-
-	if (getParam('oscillator') === 'true') {
-		self.getInitialConditions = getOscillators;
-	} else {
-		self.getInitialConditions = getRandomInitialConditions;
-	}
 
 	return self;
 };

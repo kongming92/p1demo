@@ -5,6 +5,8 @@ To see the program in action, open index.html. The web page shows the initial co
 the progression of the board by clicking the start button. The board may be paused at any time by clicking the
 stop button.
 
+The browser window should be at least 1050px wide for the board to render properly.
+
 The dropdown menu gives the possible initial configurations and can be changed when the board is paused.
 * Cells start off alive randomly with probability 0.1
 * Cells start off alive randomly with probability 0.2
@@ -34,7 +36,8 @@ oscillator, and blank grid cases.
 
 Design challenges
 ---
-Design challenges are described in design-challenges.md
+Design challenges are described in design-challenges.md. The design challenges for part 1 (which are still
+relevant) are in design-challenges-part1.md.
 
 
 Testing

@@ -1,5 +1,3 @@
-DESIGN CHALLENGES
-
 1. Separation of concerns between drawing and game code
 
 As discussed many times on the project page and Piazza, the drawing code should not be deeply embedded in the game code. When designing this project, I made sure that none of the information about the behavior of the game (such as Board, Rules) contained any drawing code.

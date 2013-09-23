@@ -75,7 +75,6 @@ var BoardControl = function(board) {
 								$(this).addClass('alive');
 							}
 						}
-
 					}
 				});
 				boardView.addElt(i, j, $cell);

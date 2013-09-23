@@ -15,20 +15,6 @@ var each = function(a, f) {
 	});
 };
 
-// Code to get the value of a paramater passed in the URL, similar to index.html?id=1
-// Taken from http://ziemecki.net/content/javascript-parsing-url-parameters
-var getParam = function(sname) {
-	var params = location.search.substr(location.search.indexOf("?")+1);
-	var sval = "";
-	params = params.split("&");
-	// split param and value into individual pieces
-	for (var i=0; i<params.length; i++) {
-		temp = params[i].split("=");
-		if ( temp[0] === sname ) { sval = temp[1]; }
-	}
-	return sval;
-};
-
 // Code to simulate an assertion
 // http://stackoverflow.com/questions/15313418/javascript-assert
 var assert = function(condition, message) {

@@ -12,15 +12,15 @@ var Initialize = function() {
 
 	// Initialize the board randomly, where each cell has initial probability of being alive given by factor
 	// If factor is not defined, it defaults to 0.1
-	self.getRandomInitialConditions = function(factor) {
+	self.getRandomInitialConditions = function(width, height, factor) {
 		if (typeof factor === 'undefined') {
 			factor = 0.1;
 		}
 		assert(typeof factor === 'number' && factor >= 0 && factor <= 1, 'factor is not a number between 0 and 1');
 		var starting = [];
 
-		from_to(0, GAME_SIZE_X - 1, function(i) {
-			from_to(0, GAME_SIZE_Y - 1, function(j) {
+		from_to(0, width - 1, function(i) {
+			from_to(0, height - 1, function(j) {
 				if (Math.random() < factor) {
 					starting.push(GameCoord(i, j));
 				}
@@ -56,6 +56,7 @@ var Initialize = function() {
 		return starting.concat(blinker, toad, beacon, pulsar);
 	};
 
+	// Return an empty array; there are no alive cells to start
 	self.getBlank = function() {
 		return [];
 	};

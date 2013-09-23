@@ -37,5 +37,6 @@ var Rules = function() {
 		}
 	};
 
+	Object.freeze(self);
 	return self;
 };

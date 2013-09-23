@@ -1,11 +1,25 @@
+#control-container {
+	margin: 20px auto;
+	text-align: center;
+}
+
+select {
+	font-size: 1.25em;
+}
+
+#main-container {
+	min-width: 1050px;
+	text-align: center;
+}
+
 .row {
 	line-height: 0;
 }
 
 .cell {
 	display: inline-block;
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 	border: 1px solid #CCC;
 	background-color: #EEE;
 }
@@ -16,7 +30,7 @@
 
 button {
 	width: 85px;
-	height: 40px;
+	height: 30px;
 	font-size: 1.2em;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -39,7 +53,6 @@ button.stop {
 
 button.start:not([disabled]):hover {
 	background-color: #51A351;
-
 }
 
 button.stop:not([disabled]):hover {
